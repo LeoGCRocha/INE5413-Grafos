@@ -27,6 +27,7 @@ class Grafo:
             self.__listAdj[int(y) - 1].append(int(x))
             # Fim da construção da lista de adj
             # Adicionar construção da matriz de adj
+        # Metodo somente para demonstrar que o codigo esta funcionando pode ser removido depois
         for a in self.__listAdj:
             print(a)
     # def qtdVertices():
