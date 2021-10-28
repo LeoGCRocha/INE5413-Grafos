@@ -1,2 +1,2 @@
 # grafos-a1-20212
-atividade 1 disciplina grafos semestre 20212
+Trabalho desenvolvido por Leonardo Rocha, Andre Souza e Tiago Comelli.
