@@ -6,33 +6,42 @@ class Grafo:
         self.__numArestas = arestas
         self.__arquivoRef = arquivoRef 
         self.__matrizAdj = []
-        self.__listAdj = []
-        self.ajustandoGrafo()
+        self.__direcionado = False
+        self.iniciarGrafo()
     def lerArquivo(self):
         meuArquivo = open(self.__arquivoRef, 'r')
         return meuArquivo.readlines()
-    def ajustandoGrafo(self):
+    def iniciarGrafo(self):
         lista = self.lerArquivo()
         self.__numVertices = int(lista[0].split(" ")[1])
-        # Construindo a lista de adjacencia
-        self.__listAdj = [0]*self.__numVertices
-        for a in range(1, self.__numVertices + 1):
-            x,y = map(str, lista[a].split(" "))
-            self.__listAdj[int(x) - 1] = [y.replace("\n", "")]
-            # Adicionar aqui construção da matriz de adj
-        for a in range(self.__numVertices + 2, len(lista)):
-            x,y,z = map(str, lista[a].split(" ")) # x vertice 1, y vertice 2, z o peso
-            # grafo não direcionado portando x -> y, y -> x
-            self.__listAdj[int(x) - 1].append(int(y))
-            self.__listAdj[int(y) - 1].append(int(x))
-            # Fim da construção da lista de adj
-            # Adicionar construção da matriz de adj
-        # Metodo somente para demonstrar que o codigo esta funcionando pode ser removido depois
-        for a in self.__listAdj:
-            print(a)
+        # Construção por matriz de adj
+        # Construção de vetor
+        if self.arquivoRef.split(".")[1] == ".gr":
+            pass
+            # Arquivo especial para outras partes
+        else:
+            self.__numVertices = int(lista[1].split(" ")[1])
+        # Verifcando tipo de grafo
+        # Não direcionado
+        if lista[self.__numVertices + 2] == "*edges":
+            pass
+        # Direcionado
+        elif lista[self.__numVertices + 2] == "*arcs":
+            self.__direcionado = True
     # def qtdVertices():
     def qtdVertices(self):
         return self.__numVertices
+    # def qtdArestas():
+    def qtdArestas(self):
+        pass
+    # def construir_grafos_txt():
+    def construir_grafos_txt():
+        # continuar daqui 
+        pass
+    # def construir_grafos_grr()
+    def construir_grafos_grr():
+        pass
+
 if __name__ == "__main__":
     meuGrafo = Grafo("arquivos/adjnoun.net")
     print(meuGrafo.qtdVertices())
