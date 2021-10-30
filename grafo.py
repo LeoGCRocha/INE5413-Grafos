@@ -16,6 +16,9 @@ class Grafo:
     def iniciarGrafo(self):
         lista = self.lerArquivo()
         self.__numVertices = int(lista[0].split(" ")[1])
+        # Adicionar vertices em um dicionario para o metodo rotulo(v)
+        # CONTINUAR DAQUI !!!!!!!
+        
         # Construção por matriz de adj
         # Construção de vetor
         if self.__arquivoRef.split(".")[1] == ".gr":
@@ -29,6 +32,7 @@ class Grafo:
         self.__matrizAdj = [math.inf] * self.__numVertices
         for i in range(0, self.__numVertices):
             self.__matrizAdj[i] = [math.inf] * self.__numVertices
+        print(self.__matrizAdj)
         if self.__tipo == "txt":
             self.construir_grafos_txt(lista)
         print(self.__matrizAdj)
