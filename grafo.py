@@ -1,3 +1,4 @@
+import math
 class Grafo:
     # IMPORTANTE
     # Grafo não direcionado, portanto é necessario adicionar a ligação em ambos os lados
@@ -16,18 +17,29 @@ class Grafo:
         self.__numVertices = int(lista[0].split(" ")[1])
         # Construção por matriz de adj
         # Construção de vetor
-        if self.arquivoRef.split(".")[1] == ".gr":
+        if self.__arquivoRef.split(".")[1] == ".gr":
             pass
             # Arquivo especial para outras partes
         else:
-            self.__numVertices = int(lista[1].split(" ")[1])
+            self.__numVertices = int(lista[0].split(" ")[1])
         # Verifcando tipo de grafo
+        # Construção da matriz tamanho |V| x |V| onde |V| é o numero de vertices.
+        self.__matrizAdj = [math.inf] * self.__numVertices
+        for i in range(0, self.__numVertices):
+            self.__matrizAdj[i] = [math.inf] * self.__numVertices
         # Não direcionado
-        if lista[self.__numVertices + 2] == "*edges":
-            pass
+        # Ida e Volta
+        if lista[self.__numVertices + 1].replace("\n","") == "*edges":
+            for i in range(self.__numVertices + 2, len(lista)):
+               l = lista[i].replace("\n","").split(" ") # u,v,z
+               u = int(l[0]) - 1 
+               v = int(l[1]) - 1
+               p = float(l[2])
+               self.__matrizAdj[u][v] = p
         # Direcionado
-        elif lista[self.__numVertices + 2] == "*arcs":
+        elif lista[self.__numVertices + 1] == "*arcs":
             self.__direcionado = True
+        print(self.__matrizAdj)
     # def qtdVertices():
     def qtdVertices(self):
         return self.__numVertices
@@ -43,5 +55,5 @@ class Grafo:
         pass
 
 if __name__ == "__main__":
-    meuGrafo = Grafo("arquivos/adjnoun.net")
+    meuGrafo = Grafo("arquivos/arvore_geradora_minima/agm_tiny.net")
     print(meuGrafo.qtdVertices())
