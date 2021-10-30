@@ -18,7 +18,8 @@ class Grafo:
         self.__numVertices = int(lista[0].split(" ")[1])
         # Adicionar vertices em um dicionario para o metodo rotulo(v)
         # CONTINUAR DAQUI !!!!!!!
-        
+
+
         # Construção por matriz de adj
         # Construção de vetor
         if self.__arquivoRef.split(".")[1] == ".gr":
@@ -53,6 +54,7 @@ class Grafo:
                v = int(l[1]) - 1
                p = float(l[2])
                self.__matrizAdj[u][v] = p
+               self.__matrizAdj[v][u] = p
         # Direcionado
         elif lista[self.__numVertices + 1] == "*arcs":
             self.__direcionado = True
