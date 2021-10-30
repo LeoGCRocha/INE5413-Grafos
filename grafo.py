@@ -8,6 +8,7 @@ class Grafo:
         self.__arquivoRef = arquivoRef 
         self.__matrizAdj = []
         self.__direcionado = False
+        self.__tipo = "txt"
         self.iniciarGrafo()
     def lerArquivo(self):
         meuArquivo = open(self.__arquivoRef, 'r')
@@ -18,6 +19,7 @@ class Grafo:
         # Construção por matriz de adj
         # Construção de vetor
         if self.__arquivoRef.split(".")[1] == ".gr":
+            self.__tipo = "gr"
             pass
             # Arquivo especial para outras partes
         else:
@@ -27,6 +29,17 @@ class Grafo:
         self.__matrizAdj = [math.inf] * self.__numVertices
         for i in range(0, self.__numVertices):
             self.__matrizAdj[i] = [math.inf] * self.__numVertices
+        if self.__tipo == "txt":
+            self.construir_grafos_txt(lista)
+        print(self.__matrizAdj)
+    # def qtdVertices():
+    def qtdVertices(self):
+        return self.__numVertices
+    # def qtdArestas():
+    def qtdArestas(self):
+        pass
+    # def construir_grafos_txt():
+    def construir_grafos_txt(self, lista):
         # Não direcionado
         # Ida e Volta
         if lista[self.__numVertices + 1].replace("\n","") == "*edges":
@@ -39,21 +52,9 @@ class Grafo:
         # Direcionado
         elif lista[self.__numVertices + 1] == "*arcs":
             self.__direcionado = True
-        print(self.__matrizAdj)
-    # def qtdVertices():
-    def qtdVertices(self):
-        return self.__numVertices
-    # def qtdArestas():
-    def qtdArestas(self):
-        pass
-    # def construir_grafos_txt():
-    def construir_grafos_txt():
-        # continuar daqui 
-        pass
     # def construir_grafos_grr()
     def construir_grafos_grr():
         pass
-
 if __name__ == "__main__":
     meuGrafo = Grafo("arquivos/arvore_geradora_minima/agm_tiny.net")
     print(meuGrafo.qtdVertices())
