@@ -18,8 +18,7 @@ class Grafo:
         self.__numVertices = int(lista[0].split(" ")[1])
         # Adicionar vertices em um dicionario para o metodo rotulo(v)
         # CONTINUAR DAQUI !!!!!!!
-
-
+        
         # Construção por matriz de adj
         # Construção de vetor
         if self.__arquivoRef.split(".")[1] == ".gr":
