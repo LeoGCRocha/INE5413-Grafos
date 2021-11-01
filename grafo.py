@@ -1,7 +1,6 @@
 import math
 class Grafo:
     # IMPORTANTE
-    # Grafo não direcionado, portanto é necessario adicionar a ligação em ambos os lados
     def __init__(self, arquivoRef = "arquivo.txt", vertices = 0, arestas = 0):
         self.__numVertices = vertices
         self.__numArestas = arestas
@@ -32,10 +31,8 @@ class Grafo:
         self.__matrizAdj = [math.inf] * self.__numVertices
         for i in range(0, self.__numVertices):
             self.__matrizAdj[i] = [math.inf] * self.__numVertices
-        print(self.__matrizAdj)
         if self.__tipo == "txt":
             self.construir_grafos_txt(lista)
-        print(self.__matrizAdj)
     # def qtdVertices():
     def qtdVertices(self):
         return self.__numVertices
@@ -57,16 +54,27 @@ class Grafo:
         # Direcionado
         elif lista[self.__numVertices + 1] == "*arcs":
             self.__direcionado = True
+    # vizinhos
+    def vizinhos(self, v):
+        listaDeVizinhos = []
+        for i in range(0, self.__numVertices - 1):
+            if self.__matrizAdj[v][i] != math.inf:
+                listaDeVizinhos.append(i + 1)
+        return listaDeVizinhos
     # hasAresta
     def haAresta(self, u, v):
-        val = self.__matrizAdj[u - 1][v - 1]
+        val = self.__matrizAdj[u - 1][v - 1] # Duvida se deveria serr -1 ou não perguntar ao professor
         return True if val != math.inf else False
     # Peso de uma aresta
     def peso(self, u, v):
-        return self.__matrizAdj[u - 1][v - 1]
+        return self.__matrizAdj[u - 1][v - 1] # Duvida se deveria ser -1 ou não, perguntar ao professor
     # def construir_grafos_grr()
     def construir_grafos_grr():
         pass
 if __name__ == "__main__":
     meuGrafo = Grafo("arquivos/arvore_geradora_minima/agm_tiny.net")
+    # Testes do programa
     print(meuGrafo.qtdVertices())
+    print(meuGrafo.haAresta(1,2))
+    print(meuGrafo.vizinhos(1))
+    print(meuGrafo.peso(1,3))
