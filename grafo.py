@@ -1,4 +1,5 @@
 import math
+from os import replace
 class Grafo:
     # IMPORTANTE
     def __init__(self, arquivoRef = "arquivo.txt", vertices = 0, arestas = 0):
@@ -8,7 +9,9 @@ class Grafo:
         self.__matrizAdj = []
         self.__direcionado = False
         self.__tipo = "txt"
+        self.__Dic = {} # criacao do dicionário visando armazenar os itens a serem utilizados no grafo
         self.iniciarGrafo()
+
     def lerArquivo(self):
         meuArquivo = open(self.__arquivoRef, 'r')
         return meuArquivo.readlines()
@@ -17,6 +20,12 @@ class Grafo:
         self.__numVertices = int(lista[0].split(" ")[1])
         # Adicionar vertices em um dicionario para o metodo rotulo(v)
         # CONTINUAR DAQUI !!!!!!!
+        
+        ## Dicionário    
+        for i in range(1,self.__numVertices + 1): # loop inciado em 1 visando evitar o a captura do valor incorreto:  *vertices 6 
+                                                  #                                                                   1 "Cafeteira" --> loop inicia aqui            
+            lista1 = lista[i].replace("\n","").split(" ") # reposicionamento dos caracteres "\n" pelo espaço vazio a fim de evitar erros na tradução de itens para o dicionário
+            self.__Dic[ int(lista1[0]) ] = lista1[1] # criação dos indices do dicionário, juntamento com os elementos
         
         # Construção por matriz de adj
         # Construção de vetor
@@ -33,6 +42,11 @@ class Grafo:
             self.__matrizAdj[i] = [math.inf] * self.__numVertices
         if self.__tipo == "txt":
             self.construir_grafos_txt(lista)
+    
+    # retorna rótulo
+    def RetornaRotulo(self,v):
+        return self.__Dic.get(v)
+
     # def qtdVertices():
     def qtdVertices(self):
         return self.__numVertices
@@ -57,8 +71,8 @@ class Grafo:
     # vizinhos
     def vizinhos(self, v):
         listaDeVizinhos = []
-        for i in range(0, self.__numVertices - 1):
-            if self.__matrizAdj[v][i] != math.inf:
+        for i in range(0, self.__numVertices):
+            if self.__matrizAdj[v - 1][i] != math.inf:
                 listaDeVizinhos.append(i + 1)
         return listaDeVizinhos
     # hasAresta
@@ -71,6 +85,24 @@ class Grafo:
     # def construir_grafos_grr()
     def construir_grafos_grr():
         pass
+
+    # Grau de um vértice
+    def GrauVertice(self,v):
+        grau = 0
+        # Grafo direcionado:
+        if self.__direcionado == True:
+            pass
+        
+        # Grafo não direcionado:
+        else:
+            for i in range(0,self.__numVertices): # 
+                if self.__matrizAdj[v - 1][i] != math.inf:
+                    grau += 1
+        
+        return grau
+    
+    
+
 if __name__ == "__main__":
     meuGrafo = Grafo("arquivos/arvore_geradora_minima/agm_tiny.net")
     # Testes do programa
@@ -78,3 +110,5 @@ if __name__ == "__main__":
     print(meuGrafo.haAresta(1,2))
     print(meuGrafo.vizinhos(1))
     print(meuGrafo.peso(1,3))
+    print(meuGrafo.GrauVertice(1))
+    print(meuGrafo.RetornaRotulo(1))
