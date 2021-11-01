@@ -57,6 +57,13 @@ class Grafo:
         # Direcionado
         elif lista[self.__numVertices + 1] == "*arcs":
             self.__direcionado = True
+    # hasAresta
+    def haAresta(self, u, v):
+        val = self.__matrizAdj[u - 1][v - 1]
+        return True if val != math.inf else False
+    # Peso de uma aresta
+    def peso(self, u, v):
+        return self.__matrizAdj[u - 1][v - 1]
     # def construir_grafos_grr()
     def construir_grafos_grr():
         pass
