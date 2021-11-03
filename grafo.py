@@ -2,7 +2,7 @@ import math
 from os import replace
 class Grafo:
     # IMPORTANTE
-    def __init__(self, arquivoRef = "arquivo.txt", vertices = 0, arestas = 0):
+    def __init__(self, arquivoRef = "arquivo.txt"):
         self.__numVertices = vertices
         self.__numArestas = arestas
         self.__arquivoRef = arquivoRef 
@@ -18,15 +18,10 @@ class Grafo:
     def iniciarGrafo(self):
         lista = self.lerArquivo()
         self.__numVertices = int(lista[0].split(" ")[1])
-        # Adicionar vertices em um dicionario para o metodo rotulo(v)
-        # CONTINUAR DAQUI !!!!!!!
-        
-        ## Dicionário    
-        for i in range(1,self.__numVertices + 1): # loop inciado em 1 visando evitar o a captura do valor incorreto:  *vertices 6 
-                                                  #                                                                   1 "Cafeteira" --> loop inicia aqui            
-            lista1 = lista[i].replace("\n","").split(" ") # reposicionamento dos caracteres "\n" pelo espaço vazio a fim de evitar erros na tradução de itens para o dicionário
-            self.__Dic[ int(lista1[0]) ] = lista1[1] # criação dos indices do dicionário, juntamento com os elementos
-        
+        # Dicionário    
+        for i in range(1,self.__numVertices + 1): # Loop inciado em 1 visando evitar o a captura do valor incorreto:  *vertices 6                                                                    1 "Cafeteira" --> loop inicia aqui            
+            lista1 = lista[i].replace("\n","").split(" ") # Reposicionamento dos caracteres "\n" pelo espaço vazio a fim de evitar erros na tradução de itens para o dicionário
+            self.__Dic[ int(lista1[0]) ] = lista1[1] # Criação dos indices do dicionário, juntamento com os elementos
         # Construção por matriz de adj
         # Construção de vetor
         if self.__arquivoRef.split(".")[1] == ".gr":
