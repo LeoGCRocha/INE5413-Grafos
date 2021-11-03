@@ -44,7 +44,7 @@ class Grafo:
             self.construir_grafos_txt(lista)
     
     # retorna rótulo
-    def RetornaRotulo(self,v):
+    def retornaRotulo(self,v):
         return self.__Dic.get(v)
 
     # def qtdVertices():
@@ -87,7 +87,7 @@ class Grafo:
         pass
 
     # Grau de um vértice
-    def GrauVertice(self,v):
+    def grauVertice(self,v):
         grau = 0
         # Grafo direcionado:
         if self.__direcionado == True:
@@ -106,5 +106,5 @@ if __name__ == "__main__":
     print(meuGrafo.haAresta(1,2))
     print(meuGrafo.vizinhos(1))
     print(meuGrafo.peso(1,3))
-    print(meuGrafo.GrauVertice(1))
-    print(meuGrafo.RetornaRotulo(1))
+    print(meuGrafo.grauVertice(1))
+    print(meuGrafo.retornaRotulo(1))
