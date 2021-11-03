@@ -98,11 +98,7 @@ class Grafo:
             for i in range(0,self.__numVertices): # 
                 if self.__matrizAdj[v - 1][i] != math.inf:
                     grau += 1
-        
         return grau
-    
-    
-
 if __name__ == "__main__":
     meuGrafo = Grafo("arquivos/arvore_geradora_minima/agm_tiny.net")
     # Testes do programa
