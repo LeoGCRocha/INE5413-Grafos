@@ -3,8 +3,8 @@ from os import replace
 class Grafo:
     # IMPORTANTE
     def __init__(self, arquivoRef = "arquivo.txt"):
-        self.__numVertices = vertices
-        self.__numArestas = arestas
+        self.__numVertices = 0
+        self.__numArestas = 0
         self.__arquivoRef = arquivoRef 
         self.__matrizAdj = []
         self.__direcionado = False

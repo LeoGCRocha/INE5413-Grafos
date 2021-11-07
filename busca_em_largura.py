@@ -12,15 +12,24 @@ def busca_em_largura(arquivo, vertice):
     queue = [] # Lista de vertices
     queue.append(vertice)
     # Propagação das visitas
+    nivel = 0
+    # PROGRAMA COM ERRO VERIFICAR MELHOR ALGORITMO
     while len(queue) > 0:
         u = queue.pop()
-        # Deve ser +1 ou não?
+        # Adicionar contador de niveis
+        l = []
         for v in meuGrafo.vizinhos(u):
-            cv[v - 1] = True
-            # Continuar daqui  
-
-
-
+            if not cv[v-1]: # QUAL PROBLEMA NESTA LOGICA DO EXERCICIO
+                cv[v - 1] = True
+                dv[v - 1] = dv[u - 1] + 1
+                av[v - 1] = u
+                queue.insert(0, v)
+        # CONTINUAR DAQUI CONTINUAR DAQUI CONTINUAR DAQUI
+        # LOGICA PARA CADA NIVEL
+        # TESTAR SE VALORES ESTÃO FUNCIONANDO
+        print("%d:" % (nivel), end = ' ')
+        print(l)
+        nivel += 1
 if __name__ == "__main__":
     vertice = 3 # vertice s que sera base para o problema
     busca_em_largura("arquivos/arvore_geradora_minima/agm_tiny.net", vertice)
