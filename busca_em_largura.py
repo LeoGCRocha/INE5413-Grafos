@@ -6,30 +6,23 @@ def busca_em_largura(arquivo, vertice):
     cv = [False] * meuGrafo.qtdVertices() # Determina se o vertice já foi visitado
     dv = [math.inf] * meuGrafo.qtdVertices() # Determina a distancia ate o vertice
     av = [None] * meuGrafo.qtdVertices()
-    # configurando o vertice de origem
+    # Configurando o vertice de origem
     cv[vertice - 1] = True
     dv[vertice - 1] = 0
     queue = [] # Lista de vertices
-    queue.append(vertice)
+    queue.append(vertice) # Adicionando a fila
     # Propagação das visitas
     nivel = 0
-    # PROGRAMA COM ERRO VERIFICAR MELHOR ALGORITMO
-    while len(queue) > 0:
-        u = queue.pop()
-        # Adicionar contador de niveis
-        l = []
+    while len(queue) > 0: # Q.empty() false do
+        u = queue.pop() # Removendo elemento da fila e verificando
         for v in meuGrafo.vizinhos(u):
-            if not cv[v-1]: # QUAL PROBLEMA NESTA LOGICA DO EXERCICIO
+            if not cv[v-1]: #  Cv false then
                 cv[v - 1] = True
                 dv[v - 1] = dv[u - 1] + 1
                 av[v - 1] = u
-                queue.insert(0, v)
-        # CONTINUAR DAQUI CONTINUAR DAQUI CONTINUAR DAQUI
-        # LOGICA PARA CADA NIVEL
-        # TESTAR SE VALORES ESTÃO FUNCIONANDO
-        print("%d:" % (nivel), end = ' ')
-        print(l)
-        nivel += 1
+                queue.insert(0, v) # Q.enqueue(v)
+    print(dv)
+    print(av)
 if __name__ == "__main__":
     vertice = 3 # vertice s que sera base para o problema
     busca_em_largura("arquivos/arvore_geradora_minima/agm_tiny.net", vertice)
