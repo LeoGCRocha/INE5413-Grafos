@@ -1,28 +1,26 @@
-from grafo import *
-import math
-def busca_em_largura(arquivo, vertice):
-    meuGrafo = Grafo(arquivo)
-    # configurando todos os vertices
-    cv = [False] * meuGrafo.qtdVertices() # Determina se o vertice já foi visitado
-    dv = [math.inf] * meuGrafo.qtdVertices() # Determina a distancia ate o vertice
-    av = [None] * meuGrafo.qtdVertices()
-    # Configurando o vertice de origem
-    cv[vertice - 1] = True
-    dv[vertice - 1] = 0
-    queue = [] # Lista de vertices
-    queue.append(vertice) # Adicionando a fila
-    # Propagação das visitas
+from grafo import Grafo
+
+def busca_em_largura(grafo, vertice):
+    visitados = [None] * grafo.qtdVertices()
+    fila_de_vertices = [vertice]
     nivel = 0
-    while len(queue) > 0: # Q.empty() false do
-        u = queue.pop() # Removendo elemento da fila e verificando
-        for v in meuGrafo.vizinhos(u):
-            if not cv[v-1]: #  Cv false then
-                cv[v - 1] = True
-                dv[v - 1] = dv[u - 1] + 1
-                av[v - 1] = u
-                queue.insert(0, v) # Q.enqueue(v)
-    print(dv)
-    print(av)
+
+    while len(fila_de_vertices):
+        vestices_inicias = fila_de_vertices.copy()
+        fila_de_vertices = []
+
+        for vertice in vestices_inicias:
+            visitados[vertice-1] = nivel
+            vizinhos = [x for x in grafo.vizinhos(vertice) if visitados[x-1] == None]
+
+            for i in vizinhos: visitados[i-1] = nivel+1
+            fila_de_vertices = list(set().union(fila_de_vertices,vizinhos))
+        
+        print(f"{nivel}: {vestices_inicias}")
+        
+        nivel += 1
+         
 if __name__ == "__main__":
-    vertice = 3 # vertice s que sera base para o problema
-    busca_em_largura("arquivos/arvore_geradora_minima/agm_tiny.net", vertice)
+    grafo = Grafo("ent.txt")
+    vertice_inicial = 3
+    busca_em_largura(grafo, vertice_inicial)
