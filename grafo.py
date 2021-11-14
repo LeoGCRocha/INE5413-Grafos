@@ -6,7 +6,7 @@ class Grafo:
         self.__numVertices = 0
         self.__numArestas = 0
         self.__arquivoRef = arquivoRef 
-        self.__matrizAdj = []
+        self.matrizAdj = []
         self.__direcionado = False
         self.__tipo = "txt"
         self.__Dic = {} # criacao do dicionário visando armazenar os itens a serem utilizados no grafo
@@ -32,9 +32,9 @@ class Grafo:
             self.__numVertices = int(lista[0].split(" ")[1])
         # Verifcando tipo de grafo
         # Construção da matriz tamanho |V| x |V| onde |V| é o numero de vertices.
-        self.__matrizAdj = [math.inf] * self.__numVertices
+        self.matrizAdj = [math.inf] * self.__numVertices
         for i in range(0, self.__numVertices):
-            self.__matrizAdj[i] = [math.inf] * self.__numVertices
+            self.matrizAdj[i] = [math.inf] * self.__numVertices
         if self.__tipo == "txt":
             self.construir_grafos_txt(lista)
     
@@ -58,8 +58,8 @@ class Grafo:
                u = int(l[0]) - 1 
                v = int(l[1]) - 1
                p = float(l[2])
-               self.__matrizAdj[u][v] = p
-               self.__matrizAdj[v][u] = p
+               self.matrizAdj[u][v] = p
+               self.matrizAdj[v][u] = p
         # Direcionado
         elif lista[self.__numVertices + 1] == "*arcs":
             self.__direcionado = True
@@ -67,16 +67,16 @@ class Grafo:
     def vizinhos(self, v):
         listaDeVizinhos = []
         for i in range(0, self.__numVertices):
-            if self.__matrizAdj[v - 1][i] != math.inf:
+            if self.matrizAdj[v - 1][i] != math.inf:
                 listaDeVizinhos.append(i + 1)
         return listaDeVizinhos
     # hasAresta
     def haAresta(self, u, v):
-        val = self.__matrizAdj[u - 1][v - 1] # Duvida se deveria serr -1 ou não perguntar ao professor
+        val = self.matrizAdj[u - 1][v - 1] # Duvida se deveria serr -1 ou não perguntar ao professor
         return True if val != math.inf else False
     # Peso de uma aresta
     def peso(self, u, v):
-        return self.__matrizAdj[u - 1][v - 1] # Duvida se deveria ser -1 ou não, perguntar ao professor
+        return self.matrizAdj[u - 1][v - 1] # Duvida se deveria ser -1 ou não, perguntar ao professor
     # def construir_grafos_grr()
     def construir_grafos_grr():
         pass
@@ -91,9 +91,10 @@ class Grafo:
         # Grafo não direcionado:
         else:
             for i in range(0,self.__numVertices): # 
-                if self.__matrizAdj[v - 1][i] != math.inf:
+                if self.matrizAdj[v - 1][i] != math.inf:
                     grau += 1
         return grau
+        
 if __name__ == "__main__":
     meuGrafo = Grafo("arquivos/arvore_geradora_minima/agm_tiny.net")
     # Testes do programa
