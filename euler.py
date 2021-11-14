@@ -1,54 +1,38 @@
 from grafo import Grafo
-
 import random
-
-def Euler(grafo,vertices):
-    # Primeira condição para ser um grafo euleriano: a quantidade de vértices de grau impar deve ser zero
-    for i in range(vertices):
+def Euler(grafo):
+    # Primeira condição: caso grau do vertice seja impar não existe ciclo portanto caminho []
+    for i in range(grafo.qtdVertices()):
         if grafo.grauVertice(i) % 2 != 0:
-            return("0")
-    
-    # vértice inicial aleatório a ser escolhido
-    vinit = random.randint(0,vertices)
-
-    # caminho realizado para completar o grafo
-    caminho = []
-
-    grafo = grafo.matrizAdj
-   
-    # O vértice atual é o vértice inicial
-    vatual = vinit
-
-    # o vértice inicial é o primeiro a ser visitado, dessa forma, usaremos um vetor para armazenar os vértices visitados
-    visitados = [vinit]
-
-    while(True):
-        #Loop para visitar o vértice adjacente
-        for i in range(vertices):
-            if(grafo[vatual][i] == 1.0):
-                # Colocando a aresta no vetor de caminho percorrido
-                caminho.append([vatual,i])
-
-                # Marcando a posição da aresta visitada com -1
-                grafo[vatual][i] = -1
-                grafo[i][vatual] = -1
-
-                # Coloca o vértice visitado que foi visitado no vetor de vértices visitados
-                visitados.append(i)
-
-                # O próximo vértice a ser analisado será o vértice adjacente, reincia-se o processo de busca
-                vatual = i
+            return(0, [])
+    # Escolha um vertice inicial
+    vinicial = 1
+    # Colocando na pilha
+    s = [vinicial]
+    # Matriz adj
+    arestas = grafo.matrizAdj.copy()
+    t = []
+    # -1 p/ marcada
+    while len(s) > 0:
+        # vertice do topo
+        u = s[-1]
+        inci = False
+        for w in grafo.vizinhos(u):
+            if arestas[u-1][w-1] != -1:
+                arestas[u-1][w-1] = -1
+                arestas[w-1][u-1] = -1
+                s.append(w)
+                inci = True
                 break
-            
-        # Verfica se o vértice atual é o vértice incial, caso seja, finaliza o algoritimo,
-        # o caminho foi realizado com sucesso, sem repetir as arestas percorridas
-        if(vinit == vatual):
-            break
-
-    print("1")
-    print(caminho)
+        if not inci:
+            s.pop()
+            t.append(u)
+    return(1, t)
 
 if __name__ == "__main__":
     grafo = Grafo("arquivos/ciclo_euleriano/ciclo_euleriano/ContemCicloEuleriano.net") # Arquivo de input com o grafo a ser analisado
-    vertices = 6 # quantidade de vértices
-    Euler(grafo,vertices) # Instanciação da classe
+    resultado = Euler(grafo) # Instanciação da classe
+    print(resultado[0])
+    for x in range (0,len(resultado[1])-1):
+        print(resultado[1][x], end=",")
+    print(resultado[1][-1])

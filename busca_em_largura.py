@@ -21,6 +21,6 @@ def busca_em_largura(grafo, vertice):
         nivel += 1
          
 if __name__ == "__main__":
-    grafo = Grafo("arquivo.txt") # Aqui vai o arquivo que sera utilizado como base
+    grafo = Grafo("pathdoarquivo.txt") # Aqui vai o arquivo que sera utilizado como base
     vertice_inicial = 3
     busca_em_largura(grafo, vertice_inicial)
