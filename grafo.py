@@ -3,7 +3,7 @@ from os import replace
 class Grafo:
     # IMPORTANTE
     def __init__(self, arquivoRef = "arquivo.txt"):
-        self.__numVertices = 0
+        self.numVertices = 0
         self.__numArestas = 0
         self.__arquivoRef = arquivoRef 
         self.matrizAdj = []
@@ -17,9 +17,9 @@ class Grafo:
         return meuArquivo.readlines()
     def iniciarGrafo(self):
         lista = self.lerArquivo()
-        self.__numVertices = int(lista[0].split(" ")[1])
+        self.numVertices = int(lista[0].split(" ")[1])
         # Dicionário    
-        for i in range(1,self.__numVertices + 1): # Loop inciado em 1 visando evitar o a captura do valor incorreto:  *vertices 6                                                                    1 "Cafeteira" --> loop inicia aqui            
+        for i in range(1,self.numVertices + 1): # Loop inciado em 1 visando evitar o a captura do valor incorreto:  *vertices 6                                                                    1 "Cafeteira" --> loop inicia aqui            
             lista1 = lista[i].replace("\n","").split(" ") # Reposicionamento dos caracteres "\n" pelo espaço vazio a fim de evitar erros na tradução de itens para o dicionário
             self.__Dic[ int(lista1[0]) ] = lista1[1] # Criação dos indices do dicionário, juntamento com os elementos
         # Construção por matriz de adj
@@ -29,12 +29,12 @@ class Grafo:
             pass
             # Arquivo especial para outras partes
         else:
-            self.__numVertices = int(lista[0].split(" ")[1])
+            self.numVertices = int(lista[0].split(" ")[1])
         # Verifcando tipo de grafo
         # Construção da matriz tamanho |V| x |V| onde |V| é o numero de vertices.
-        self.matrizAdj = [math.inf] * self.__numVertices
-        for i in range(0, self.__numVertices):
-            self.matrizAdj[i] = [math.inf] * self.__numVertices
+        self.matrizAdj = [math.inf] * self.numVertices
+        for i in range(0, self.numVertices):
+            self.matrizAdj[i] = [math.inf] * self.numVertices
         if self.__tipo == "txt":
             self.construir_grafos_txt(lista)
     
@@ -44,16 +44,16 @@ class Grafo:
 
     # def qtdVertices():
     def qtdVertices(self):
-        return self.__numVertices
+        return self.numVertices
     # def qtdArestas():
     def qtdArestas(self):
-        pass
+        return self.__numArestas
     # def construir_grafos_txt():
     def construir_grafos_txt(self, lista):
         # Não direcionado
         # Ida e Volta
-        if lista[self.__numVertices + 1].replace("\n","") == "*edges":
-            for i in range(self.__numVertices + 2, len(lista)):
+        if lista[self.numVertices + 1].replace("\n","") == "*edges":
+            for i in range(self.numVertices + 2, len(lista)):
                l = lista[i].replace("\n","").split(" ") # u,v,z
                u = int(l[0]) - 1 
                v = int(l[1]) - 1
@@ -61,12 +61,12 @@ class Grafo:
                self.matrizAdj[u][v] = p
                self.matrizAdj[v][u] = p
         # Direcionado
-        elif lista[self.__numVertices + 1] == "*arcs":
+        elif lista[self.numVertices + 1] == "*arcs":
             self.__direcionado = True
     # vizinhos
     def vizinhos(self, v):
         listaDeVizinhos = []
-        for i in range(0, self.__numVertices):
+        for i in range(0, self.numVertices):
             if self.matrizAdj[v - 1][i] != math.inf:
                 listaDeVizinhos.append(i + 1)
         return listaDeVizinhos
@@ -90,7 +90,7 @@ class Grafo:
         
         # Grafo não direcionado:
         else:
-            for i in range(0,self.__numVertices): # 
+            for i in range(0,self.numVertices): # 
                 if self.matrizAdj[v - 1][i] != math.inf:
                     grau += 1
         return grau
