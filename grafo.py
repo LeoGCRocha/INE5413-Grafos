@@ -15,6 +15,7 @@ class Grafo:
     def lerArquivo(self):
         meuArquivo = open(self.__arquivoRef, 'r')
         return meuArquivo.readlines()
+    # metodo de inicializacao principal
     def iniciarGrafo(self):
         lista = self.lerArquivo()
         self.numVertices = int(lista[0].split(" ")[1])
@@ -26,8 +27,7 @@ class Grafo:
         # Construção de vetor
         if self.__arquivoRef.split(".")[1] == ".gr":
             self.__tipo = "gr"
-            pass
-            # Arquivo especial para outras partes
+            self.__numVertices 
         else:
             self.numVertices = int(lista[0].split(" ")[1])
         # Verifcando tipo de grafo
@@ -37,6 +37,9 @@ class Grafo:
             self.matrizAdj[i] = [math.inf] * self.numVertices
         if self.__tipo == "txt":
             self.construir_grafos_txt(lista)
+        if self.__tipo == "gr":
+            # DESENVOLVER ESTE METODOS PARA PROXIMAS ETAPAS
+            self.construir_grafos_grr()
     
     # retorna rótulo
     def retornaRotulo(self,v):
@@ -87,7 +90,6 @@ class Grafo:
         # Grafo direcionado:
         if self.__direcionado == True:
             pass
-        
         # Grafo não direcionado:
         else:
             for i in range(0,self.numVertices): # 
