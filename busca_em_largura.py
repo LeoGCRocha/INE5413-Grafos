@@ -19,8 +19,8 @@ def busca_em_largura(grafo, vertice):
         print(f"{nivel}: {vestices_inicias}")
         
         nivel += 1
-         
+           
 if __name__ == "__main__":
     grafo = Grafo("arquivos/arvore_geradora_minima/agm_tiny.net") # Aqui vai o arquivo que sera utilizado como base
-    vertice_inicial = 3
+    vertice_inicial = 1
     busca_em_largura(grafo, vertice_inicial) 

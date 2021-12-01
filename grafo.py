@@ -10,6 +10,7 @@ class Grafo:
         self.__direcionado = False
         self.__tipo = "txt"
         self.__Dic = {} # criacao do dicionário visando armazenar os itens a serem utilizados no grafo
+        self.vertices = []
         self.iniciarGrafo()
 
     def lerArquivo(self):
@@ -61,6 +62,7 @@ class Grafo:
                u = int(l[0]) - 1 
                v = int(l[1]) - 1
                p = float(l[2])
+               self.vertices.append([u,v,p])
                self.matrizAdj[u][v] = p
                self.matrizAdj[v][u] = p
         # Direcionado
@@ -83,7 +85,6 @@ class Grafo:
     # def construir_grafos_grr()
     def construir_grafos_grr():
         pass
-
     # Grau de um vértice
     def grauVertice(self,v):
         grau = 0
