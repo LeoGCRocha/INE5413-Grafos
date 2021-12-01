@@ -5,7 +5,6 @@ def distancias(dist):
     for i in range(g.numVertices):
         print("%d : ; d : %s"%(i+1,str(dist[i])))
 def bell(src):
-    print(g.numVertices)
     dist = [math.inf] * g.numVertices
     dist[src] = 0
     for _ in range(g.numVertices- 1):
