@@ -9,14 +9,14 @@ class Grafo:
         self.matrizAdj = []
         self.__direcionado = False
         self.__tipo = "txt"
-        self.__Dic = {} # criacao do dicionário visando armazenar os itens a serem utilizados no grafo
+        self.__Dic = {} # Criacao do dicionário visando armazenar os itens a serem utilizados no grafo
         self.vertices = []
         self.iniciarGrafo()
-
+    # Leitura de arquivo
     def lerArquivo(self):
         meuArquivo = open(self.__arquivoRef, 'r')
         return meuArquivo.readlines()
-    # metodo de inicializacao principal
+    # Metodo de inicializacao principal
     def iniciarGrafo(self):
         lista = self.lerArquivo()
         self.numVertices = int(lista[0].split(" ")[1])
@@ -39,13 +39,10 @@ class Grafo:
         if self.__tipo == "txt":
             self.construir_grafos_txt(lista)
         if self.__tipo == "gr":
-            # DESENVOLVER ESTE METODOS PARA PROXIMAS ETAPAS
             self.construir_grafos_grr()
-    
-    # retorna rótulo
+    # Retorna rótulo
     def retornaRotulo(self,v):
         return self.__Dic.get(v)
-
     # def qtdVertices():
     def qtdVertices(self):
         return self.numVertices
@@ -66,11 +63,20 @@ class Grafo:
                self.matrizAdj[u][v] = p
                self.matrizAdj[v][u] = p
         # Direcionado
-        elif lista[self.numVertices + 1] == "*arcs":
+        elif lista[self.numVertices + 1].replace("\n","") == "*arcs":
             self.__direcionado = True
-    # vizinhos
+            # Construindo grafo
+            for i in range(self.numVertices + 2, len(lista)):
+                l = lista[i].replace("\n", "").split(" ") # u, v, z
+                u = int(l[0]) - 1
+                v = int(l[1]) - 1
+                p = float(l[2])
+                self.vertices.append([u,v,p])
+                self.matrizAdj[u][v] = p
+    # Vizinhos
     def vizinhos(self, v):
         listaDeVizinhos = []
+        # Vizinhos direcionados & não direcionados
         for i in range(0, self.numVertices):
             if self.matrizAdj[v - 1][i] != math.inf:
                 listaDeVizinhos.append(i + 1)
@@ -96,14 +102,4 @@ class Grafo:
             for i in range(0,self.numVertices): # 
                 if self.matrizAdj[v - 1][i] != math.inf:
                     grau += 1
-        return grau
-        
-if __name__ == "__main__":
-    meuGrafo = Grafo("arquivos/arvore_geradora_minima/agm_tiny.net")
-    # Testes do programa
-    print(meuGrafo.qtdVertices())
-    print(meuGrafo.haAresta(1,2))
-    print(meuGrafo.vizinhos(1))
-    print(meuGrafo.peso(1,3))
-    print(meuGrafo.grauVertice(1))
-    print(meuGrafo.retornaRotulo(1))
+        return grau     
