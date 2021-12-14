@@ -102,4 +102,13 @@ class Grafo:
             for i in range(0,self.numVertices): # 
                 if self.matrizAdj[v - 1][i] != math.inf:
                     grau += 1
-        return grau     
+        return grau   
+    # Tranposto grafo
+    def transpor(self):
+        v2 = []
+        for i in self.vertices:
+            v2.append([i[1],i[0],i[2]])
+            self.matrizAdj[i[0]][i[1]] =  math.inf
+            self.matrizAdj[i[1]][i[0]] = i[2]
+            
+        self.vertices = v2
