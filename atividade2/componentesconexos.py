@@ -1,5 +1,6 @@
 from grafo import Grafo
 import math
+# Grafo baseado o demonstrado em aula pelo professor.
 g = Grafo("direcionado.net")
 # DFS (Algoritmo 16)
 def dfs(grafo, ordemvertices):
