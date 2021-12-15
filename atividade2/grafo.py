@@ -49,6 +49,9 @@ class Grafo:
     # def qtdArestas():
     def qtdArestas(self):
         return self.__numArestas
+    # Dicionario
+    def getDic(self):
+        return self.__Dic
     # def construir_grafos_txt():
     def construir_grafos_txt(self, lista):
         # Não direcionado
