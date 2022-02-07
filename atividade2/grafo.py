@@ -49,6 +49,9 @@ class Grafo:
     # def qtdArestas():
     def qtdArestas(self):
         return self.__numArestas
+    # def arestas():
+    def arestas(self):
+        return [(i, j, self.matrizAdj[i][j]) for i in range(self.numVertices) for j in range(self.numVertices) if self.matrizAdj[i][j] != math.inf]
     # Dicionario
     def getDic(self):
         return self.__Dic
