@@ -9,14 +9,15 @@ class Grafo:
         self.matrizAdj = []
         self.__direcionado = False
         self.__tipo = "txt"
-        self.__Dic = {} # Criacao do dicionário visando armazenar os itens a serem utilizados no grafo
         self.vertices = []
-        self.iniciarGrafo()
+        
         # gr grafo (grafo de fluxo)
         n = -1 # inicial
         s = -1 # final
         # matix de fluxo
         self.matrizFluxo = []
+        self.Dic = {} # Criacao do dicionário visando armazenar os itens a serem utilizados no grafo
+        self.iniciarGrafo()
     # Leitura de arquivo
     def lerArquivo(self):
         meuArquivo = open(self.__arquivoRef, 'r')
@@ -40,7 +41,7 @@ class Grafo:
             self.construir_grafos_grr(lista)
     # Retorna rótulo
     def retornaRotulo(self,v):
-        return self.__Dic.get(v)
+        return self.Dic.get(v)
     # def qtdVertices():
     def qtdVertices(self):
         return self.numVertices
@@ -50,12 +51,12 @@ class Grafo:
     # def arestas():
     def arestas(self):
         return [(i, j, self.matrizAdj[i][j]) for i in range(self.numVertices) for j in range(self.numVertices) if self.matrizAdj[i][j] != math.inf]
-    # Dicionario
-    def getDic(self):
-        return self.__Dic
     # def construir_grafos_txt():
     def construir_grafos_txt(self, lista):
         # Não direcionado
+        for i in range(1, self.numVertices):
+            split = lista[i].replace("\n", "").split(" ")
+            self.Dic[split[0]] = split[1]
         # Ida e Volta
         if lista[self.numVertices + 1].replace("\n","") == "*edges":
             for i in range(self.numVertices + 2, len(lista)):

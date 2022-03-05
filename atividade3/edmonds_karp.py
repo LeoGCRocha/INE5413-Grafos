@@ -24,7 +24,6 @@ def ford_fulkerson():
 def edmonds_karp(fonte, destino): # s,t
     cv = [False] * g.numVertices # Conhecido
     av = [None] * g.numVertices # Ancestral
-    cs = True # configurando o vertice de origem
     Q = [fonte]
     while len(Q) > 0:
         u = Q.pop()
