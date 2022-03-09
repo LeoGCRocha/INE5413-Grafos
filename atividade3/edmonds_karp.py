@@ -1,7 +1,5 @@
 from grafo import Grafo
 
-
-
 def ford_fulkerson():
 	global grafo
 	
@@ -28,8 +26,6 @@ def ford_fulkerson():
 
 	print(fluxo)
 	
-
-
 def edmonds_karp(fonte, destino):
 	global grafo
 
